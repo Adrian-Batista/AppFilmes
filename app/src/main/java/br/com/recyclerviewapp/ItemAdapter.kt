@@ -8,20 +8,24 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import br.com.recyclerviewapp.databinding.ItemBinding
 
 class ItemAdapter(
     private val itemList: List<Item>,
     private val listener: OnItemClickListener
     ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class ItemViewHolder(private val itemBinding: ItemBinding) : RecyclerView.ViewHolder(itemBinding.root),
     View.OnClickListener{
-        val imageView: ImageView = itemView.findViewById(R.id.imageView)
-        val textView1: TextView = itemView.findViewById(R.id.textView1)
-        val textView2: TextView = itemView.findViewById(R.id.textView2)
-
         init {
             itemView.setOnClickListener(this)
+        }
+
+        fun bind(item: Item){
+            itemBinding.imageView.setImageResource(item.imageResource)
+            itemBinding.textView1.text = item.text1
+            itemBinding.textView2.text = item.text2
+
         }
 
         override fun onClick(v: View?) {
@@ -33,16 +37,14 @@ class ItemAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item,
-            parent, false)
-        return ItemViewHolder(itemView)
+        val itemBinding = ItemBinding.inflate(
+            LayoutInflater.from(parent.context),parent, false)
+        return ItemViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = itemList[position]
-        holder.imageView.setImageResource(currentItem.imageResource)
-        holder.textView1.setText(currentItem.text1)
-        holder.textView2.setText(currentItem.text2)
+        holder.bind(currentItem)
     }
 
     override fun getItemCount() = itemList.size
