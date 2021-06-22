@@ -25,6 +25,7 @@ class ItemAdapter(
             itemBinding.imageView.setImageResource(item.imageResource)
             itemBinding.textView1.text = item.text1
             itemBinding.textView2.text = item.text2
+            itemBinding.textView3.text = item.text3.toString()
 
         }
 

@@ -38,12 +38,15 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }*/
 
     fun insertItem(view: View){
-        
+
         val titulo: EditText = findViewById(R.id.tituloEditText)
         val txtTitulo = titulo.text.toString()
         val genero: EditText = findViewById(R.id.generoText)
         val txtGenero = genero.text.toString()
-        val newItem = Item(R.drawable.ic_android_black_24dp, txtTitulo, txtGenero)
+        val ano: EditText = findViewById(R.id.anoText)
+        val txtano = ano.text.toString().toInt()
+
+        val newItem = Item(R.drawable.ic_android_black_24dp, txtTitulo, txtGenero, txtano)
 
         list.add(newItem)
         adapter.notifyItemInserted(list.size)
@@ -70,7 +73,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 1-> R.drawable.ic_baseline_ac_unit_24
                 else-> R.drawable.ic_baseline_adb_24
             }
-            val item = Item(drawable, "Filme $i", "Gênero")
+            val item = Item(drawable, "Filme $i", "Gênero", 2000)
             list.add(item)
         }
         return list
