@@ -2,11 +2,10 @@ package br.com.recyclerviewapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import br.com.recyclerviewapp.databinding.ActivityMainBinding
 import kotlin.random.Random
 
@@ -24,19 +23,18 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         val view = binding.root
         setContentView(view)
 
-
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
     }
 
     fun insertItem(view: View){
+        val index: Int = Random.nextInt(8)
         val newItem = Item(R.drawable.ic_android_black_24dp,
-            "New item at position ${list.size}",
-            "Line 2")
-
-        list.add(newItem)
-        adapter.notifyItemInserted(list.size)
+            "Novo Filme na posição $index",
+            "Gênero")
+        list.add(index, newItem)
+        adapter.notifyItemInserted(index)
     }
 
     fun removeItem(view: View){
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 1-> R.drawable.ic_baseline_ac_unit_24
                 else-> R.drawable.ic_baseline_adb_24
             }
-            val item = Item(drawable, "Item $i", "Line 2")
+            val item = Item(drawable, "Filme $i", "Gênero")
             list.add(item)
         }
         return list
