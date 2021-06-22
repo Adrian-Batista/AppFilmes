@@ -28,13 +28,25 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         binding.recyclerView.setHasFixedSize(true)
     }
 
-    fun insertItem(view: View){
+   /* fun insertItem(view: View){
         val index: Int = Random.nextInt(8)
         val newItem = Item(R.drawable.ic_android_black_24dp,
             "Novo Filme na posição $index",
             "Gênero")
         list.add(index, newItem)
         adapter.notifyItemInserted(index)
+    }*/
+
+    fun insertItem(view: View){
+        
+        val titulo: EditText = findViewById(R.id.tituloEditText)
+        val txtTitulo = titulo.text.toString()
+        val genero: EditText = findViewById(R.id.generoText)
+        val txtGenero = genero.text.toString()
+        val newItem = Item(R.drawable.ic_android_black_24dp, txtTitulo, txtGenero)
+
+        list.add(newItem)
+        adapter.notifyItemInserted(list.size)
     }
 
     fun removeItem(view: View){
