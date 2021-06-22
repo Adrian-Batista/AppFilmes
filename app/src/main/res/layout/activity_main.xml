@@ -26,9 +26,10 @@
         android:id="@+id/generoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Gênero do Filme"
+        android:inputType="text"
         app:layout_constraintStart_toEndOf="@id/tituloEditText"
-        app:layout_constraintTop_toBottomOf="@id/tituloEditText"
-        android:hint="Gênero do Filme"/>
+        app:layout_constraintTop_toBottomOf="@id/tituloEditText" />
 
     <EditText
         android:id="@+id/anoText"
