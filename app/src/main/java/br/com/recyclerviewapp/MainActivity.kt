@@ -3,8 +3,10 @@ package br.com.recyclerviewapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recyclerviewapp.databinding.ActivityMainBinding
 import kotlin.random.Random
@@ -13,6 +15,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     private val list = generateDummyList(10)
     private val adapter = ItemAdapter(list, this)
+    private var removeIndex = -1
 
     private lateinit var binding: ActivityMainBinding
 
@@ -28,41 +31,58 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         binding.recyclerView.setHasFixedSize(true)
     }
 
-   /* fun insertItem(view: View){
-        val index: Int = Random.nextInt(8)
-        val newItem = Item(R.drawable.ic_android_black_24dp,
-            "Novo Filme na posição $index",
-            "Gênero")
-        list.add(index, newItem)
-        adapter.notifyItemInserted(index)
-    }*/
-
     fun insertItem(view: View){
-
+        var aux: Int = 0
         val titulo: EditText = findViewById(R.id.tituloEditText)
         val txtTitulo = titulo.text.toString()
         val genero: EditText = findViewById(R.id.generoText)
         val txtGenero = genero.text.toString()
         val ano: EditText = findViewById(R.id.anoText)
-        val txtano = ano.text.toString().toInt()
+        val txtAno = ano.text.toString().toInt()
 
-        val newItem = Item(R.drawable.ic_android_black_24dp, txtTitulo, txtGenero, txtano)
 
-        list.add(newItem)
-        adapter.notifyItemInserted(list.size)
+        if (txtTitulo.isEmpty()){
+            Toast.makeText(this, "Preencha o título do Filme!", Toast.LENGTH_SHORT).show()
+            aux++
+        }
+        if (txtGenero.isEmpty()){
+            Toast.makeText(this, "Preencha o gênero do Filme!", Toast.LENGTH_SHORT).show()
+            aux++
+        }
+        if (ano.text.toString().length !=4){
+            Toast.makeText(this, "Este campo aceita exatos 4 digitos!", Toast.LENGTH_SHORT).show()
+            aux++
+        }
+        if(aux == 0){
+            val newItem = Item(R.drawable.ic_android_black_24dp, txtTitulo, txtGenero, txtAno)
+            list.add(newItem)
+            adapter.notifyItemInserted(list.size)
+            Toast.makeText(this, "Filme criado com Sucesso!", Toast.LENGTH_SHORT).show()
+        }
+
+
+
+    }
+
+    fun editItem(view: View){
+
     }
 
     fun removeItem(view: View){
-        val index: Int = Random.nextInt(8)
-        list.removeAt(index)
-        adapter.notifyItemRemoved(index)
+        if(removeIndex != -1){
+            val index: Int = removeIndex
+            list.removeAt(index)
+            adapter.notifyItemRemoved(index)
+            Toast.makeText(this, "Item $index Selecionado!", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this, "Selecione um Filme para remover!", Toast.LENGTH_SHORT).show()
+        }
+        removeIndex = -1
     }
 
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
-        val clickedItem: Item = list[position]
-        clickedItem.text2 = "Clicked"
-        adapter.notifyItemChanged(position)
+        removeIndex = position
     }
 
     private fun generateDummyList(size: Int): ArrayList<Item>{

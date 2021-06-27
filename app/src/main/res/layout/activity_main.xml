@@ -43,11 +43,11 @@
 
     <Button
         android:id="@+id/insertButton"
-        android:layout_margin="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insert"
+        android:layout_margin="12dp"
         android:onClick="insertItem"
+        android:text="Insert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="160dp"
         android:layout_marginBottom="12dp"
-        android:onClick="insertItem"
+        android:onClick="editItem"
         android:text="Edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
