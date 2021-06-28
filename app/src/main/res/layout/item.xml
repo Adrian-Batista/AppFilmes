@@ -13,9 +13,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_android_black_24dp"></ImageView>
+            android:src="@drawable/filme"></ImageView>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
