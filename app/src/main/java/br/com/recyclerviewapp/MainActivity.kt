@@ -101,12 +101,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     private fun generateDummyList(size: Int): ArrayList<Item>{
         val list = ArrayList<Item>()
         for(i in 0 until size){
-            val drawable = when((0..2).random()){
-                0-> R.drawable.ic_android_black_24dp
-                1-> R.drawable.ic_baseline_ac_unit_24
-                else-> R.drawable.ic_baseline_adb_24
-            }
-            val item = Item(drawable, "Filme $i", "Gênero", 2000)
+            val item = Item(R.drawable.filme, "Filme $i", "Gênero", 2000)
             list.add(item)
         }
         return list
