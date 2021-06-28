@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Título"
                 android:textSize="18dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -37,12 +38,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@android:dimen/thumbnail_height"
+                android:textColor="@color/black"
                 android:text="Line 2"></TextView>
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Line 3"></TextView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
