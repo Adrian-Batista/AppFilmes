@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recyclerviewapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
-    private val list = generateDummyList(10)
+    private val list = generateDummyList(5)
     private val adapter = ItemAdapter(list, this)
     private var auxIndex = -1
 
@@ -35,19 +36,17 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         val genero: EditText = findViewById(R.id.generoText)
         val txtGenero = genero.text.toString()
         val ano: EditText = findViewById(R.id.anoText)
-        val txtAno = ano.text.toString().toInt()
+        var txtAno: Int = 0
 
-        if (txtTitulo.isEmpty()){
-            Toast.makeText(this, "Preencha o título do Filme!", Toast.LENGTH_SHORT).show()
-            aux++
-        }
-        if (txtGenero.isEmpty()){
-            Toast.makeText(this, "Preencha o gênero do Filme!", Toast.LENGTH_SHORT).show()
+        if (txtTitulo.isEmpty() or txtGenero.isEmpty()){
+            Toast.makeText(this, "Preencha o TÍTULO e GÊNERO do Filme!", Toast.LENGTH_SHORT).show()
             aux++
         }
         if (ano.text.toString().length !=4){
-            Toast.makeText(this, "Este campo aceita exatos 4 digitos!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "O campo ANO aceita exatos 4 digitos!", Toast.LENGTH_SHORT).show()
             aux++
+        }else{
+            txtAno = ano.text.toString().toInt()
         }
         if(aux == 0){
             val newItem = Item(R.drawable.filme, txtTitulo, txtGenero, txtAno)
@@ -94,7 +93,15 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
+        val item: Item = list[position]
+        val titulo: TextView = findViewById(R.id.tituloEditText)
+        titulo.setText(item.text1)
+        val genero: TextView = findViewById(R.id.generoText)
+        genero.setText(item.text2)
+        /*val ano: TextView = findViewById(R.id.anoText)
+        ano.setText(item.text3)*/
+
+        Toast.makeText(this, "Item $position selecionado!", Toast.LENGTH_SHORT).show()
         auxIndex = position
     }
 
