@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
     }
-    
+
     fun criaItem():Item?{
         var aux: Int = 0
         val titulo: EditText = findViewById(R.id.tituloEditText)
